@@ -32,7 +32,7 @@ creds_file = os.path.expanduser("~/.rackspace_cloud_credentials")
 pyrax.set_credential_file(creds_file)
 cs = pyrax.cloudservers
 
-def how_many_servers():
+def how_many_servers(): #Still working on this function. Regardless of number entered only one server builds.
     servers = raw_input("How many servers do you want to build?: ")
 how_many_servers()
 
