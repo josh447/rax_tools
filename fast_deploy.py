@@ -32,4 +32,37 @@ creds_file = os.path.expanduser("~/.rackspace_cloud_credentials")
 pyrax.set_credential_file(creds_file)
 cs = pyrax.cloudservers
 
-servers = raw_input("How many servers do you want to build?: ")
+def how_many_servers():
+    servers = raw_input("How many servers do you want to build?: ")
+how_many_servers()
+
+def list_flavors():
+    print "Here is a list of flavors."
+    flvs = cs.list_flavors()
+    for flv in flvs:
+        print "ID:", flv.id, flv.name
+list_flavors()
+
+flavor = raw_input("Please select the flavor ID above you want to use: ")
+
+
+def list_images():
+    print "Here is a list of images."
+    imgs = cs.images.list()
+    for img in imgs:
+        print "Name: %s\n  ID: %s" % (img.name, img.id)
+list_images()
+
+image = raw_input("Please select the image ID above you want to use: ")
+
+print "Your Server(s) will now build...."
+
+
+server_name = pyrax.utils.random_ascii(8)
+
+server = cs.servers.create(server_name, image, flavor)
+print "Name:", server.name
+print "ID:", server.id
+print "Status:", server.status
+print "Admin Password:", server.adminPass
+print"Networks:", server.networks
