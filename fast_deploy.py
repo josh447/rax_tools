@@ -32,7 +32,6 @@ creds_file = os.path.expanduser("~/.rackspace_cloud_credentials")
 pyrax.set_credential_file(creds_file)
 cs = pyrax.cloudservers
 
-#Still working on this function. Regardless of number entered only one server builds.
 number_of_servers = int(raw_input("How many servers do you want to build?: "))
 
 
@@ -58,11 +57,13 @@ image = raw_input("Please select the image ID above you want to use: ")
 print "Your Server(s) will now build.... \n"
 
 def server_build():
-    server_name = pyrax.utils.random_ascii(8)
-    server = cs.servers.create(server_name, image, flavor)
-    print "Name:", server.name
-    print "ID:", server.id
-    print "Status:", server.status
-    print "Admin Password:", server.adminPass
-    print"Networks:", server.networks
+    for i in range(number_of_servers):
+        server_name = pyrax.utils.random_ascii(8)
+        server = cs.servers.create(server_name, image, flavor)
+        print "Name:", server.name
+        print "ID:", server.id
+        print "Status:", server.status
+        print "Admin Password:", server.adminPass
+        print"Networks:", server.networks
+        print "\n" 
 server_build()
