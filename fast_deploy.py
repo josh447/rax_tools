@@ -31,15 +31,43 @@ pyrax.set_setting("identity_type", "rackspace")
 creds_file = os.path.expanduser("~/.rackspace_cloud_credentials")
 pyrax.set_credential_file(creds_file)
 cs = pyrax.cloudservers
+cs_dfw = pyrax.connect_to_cloudservers(region="DFW")
+cs_ord = pyrax.connect_to_cloudservers(region="ORD")
+cs_iad = pyrax.connect_to_cloudservers(region="IAD")
+cs_syd = pyrax.connect_to_cloudservers(region="SYD")
+cs_hkg = pyrax.connect_to_cloudservers(region="HKG")
+
+
+region = raw_input("""Which Region do you want to connect to?\n
+1. DFW\n2. ORD\n3. IAD\n4. SYD\n5. HKG\n: """)
 
 number_of_servers = int(raw_input("How many servers do you want to build?: "))
 
 
 def list_flavors():
     print "Here is a list of flavors."
-    flvs = cs.list_flavors()
-    for flv in flvs:
-        print "ID:", flv.id, flv.name
+    if region == "DFW":
+        flvs_dfw = cs_dfw.list_flavors()
+        for flv in flvs_dfw:
+            print "ID:", flv.id, flv.name
+    elif region == "ORD":
+        flvs_ord = cs_ord.list_flavors()
+        for flv in flvs_ord:
+            print "ID:", flv.id, flv.name
+    elif region == "IAD":
+        flvs_iad = cs_iad.list_flavors()
+        for flv in flvs_iad:
+            print "ID:", flv.id, flv.name
+    elif region == "SYD":
+        flvs_syd = cs_syd.list_flavors()
+        for flv in flvs_syd:
+            print "ID:", flv.id, flv.name
+    elif region == "HKG":
+        flvs_hkg = cs_hkg.list_flavors()
+        for flv in flvs_hkg:
+            print "ID:", flv.id, flv.name
+    else:
+        return
 list_flavors()
 
 flavor = raw_input("Please select the flavor ID above you want to use: ")
@@ -47,9 +75,28 @@ flavor = raw_input("Please select the flavor ID above you want to use: ")
 
 def list_images():
     print "Here is a list of images."
-    imgs = cs.images.list()
-    for img in imgs:
-        print "Name: %s\n  ID: %s" % (img.name, img.id)
+    if region == "DFW":
+        imgs_dfw = cs_dfw.images.list()
+        for img in imgs_dfw:
+            print "Name: %s\n  ID: %s" % (img.name, img.id)
+    elif region == "ORD":
+        imgs_ord = cs_ord.images.list()
+        for img in imgs_ord:
+            print "Name: %s\n ID: %s" % (img.name, img.id)
+    elif region == "IAD":
+        imgs_iad = cs_iad.images.list()
+        for img in imgs_iad:
+            print "Name: %s\n ID: %s" % (img.name, img.id)
+    elif region == "SYD":
+        imgs_syd = cs_syd.images.list()
+        for img in imgs_syd:
+            print "Name: %s\n ID: %s" % (img.name, img,id)
+    elif region == "HKG":
+        imgs_hkg = cs_hkg.images.list()
+        for img in imgs_hkg:
+            print "Name: %s\n ID: %s" % (img.name, img,id)
+    else:
+        return
 list_images()
 
 image = raw_input("Please select the image ID above you want to use: ")
@@ -59,11 +106,46 @@ print "Your Server(s) will now build.... \n"
 def server_build():
     for i in range(number_of_servers):
         server_name = pyrax.utils.random_ascii(8)
-        server = cs.servers.create(server_name, image, flavor)
-        print "Name:", server.name
-        print "ID:", server.id
-        print "Status:", server.status
-        print "Admin Password:", server.adminPass
-        print"Networks:", server.networks
-        print "\n" 
+        if region == "DFW":
+            server_dfw = cs_dfw.servers.create(server_name, image, flavor)
+            print "Name:", server_dfw.name
+            print "ID:", server_dfw.id
+            print "Status:", server_dfw.status
+            print "Admin Password:", server_dfw.adminPass
+            print "Networks:", server_dfw.networks
+            print "\n" 
+        elif region == "ORD":
+            server_ord = cs_ord.servers.create(server_name, image, flavor)
+            print "Name:", server_ord.name
+            print "ID:", server_ord.id
+            print "Status:", server_ord.status
+            print "Admin Password:", server_ord.adminPass
+            print "Networks:", server_ord.netowrks
+            print "\n"
+        elif region == "IAD":
+            server_iad = cs_iad.servers.create(server_name, image, flavor)
+            print "Name:", server_iad.name
+            print "ID:", server_iad.id
+            print "Status:", server_iad.status
+            print "Admin Password:", server_iad.adminPass
+            print "Networks:", server_iad.netowrks
+            print "\n"
+        elif region == "SYD":
+            server_syd = cs_syd.servers.create(server_name, image, flavor)
+            print "Name:", server_syd.name
+            print "ID:", server_syd.id
+            print "Status:", server_syd.status
+            print "Admin Password:", server_syd.adminPass
+            print "Networks:", server_syd.netowrks
+            print "\n"
+        elif region == "HKG":
+            server_hkg = cs_hkg.servers.create(server_name, image, flavor)
+            print "Name:", server_hkg.name
+            print "ID:", server_hkg.id
+            print "Status:", server_hkg.status
+            print "Admin Password:", server_hkg.adminPass
+            print "Networks:", server_hkg.netowrks
+            print "\n"
+        else:
+            return
 server_build()
