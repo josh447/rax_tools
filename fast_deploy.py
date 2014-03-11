@@ -46,23 +46,23 @@ number_of_servers = int(raw_input("How many servers do you want to build?: "))
 
 def list_flavors():
     print "Here is a list of flavors."
-    if region == "DFW":
+    if region == "DFW" or region == "dfw" or region == "1":
         flvs_dfw = cs_dfw.list_flavors()
         for flv in flvs_dfw:
             print "ID:", flv.id, flv.name
-    elif region == "ORD":
+    elif region == "ORD" or region == "ord" or region == "2":
         flvs_ord = cs_ord.list_flavors()
         for flv in flvs_ord:
             print "ID:", flv.id, flv.name
-    elif region == "IAD":
+    elif region == "IAD" or region == "iad" or region == "3":
         flvs_iad = cs_iad.list_flavors()
         for flv in flvs_iad:
             print "ID:", flv.id, flv.name
-    elif region == "SYD":
+    elif region == "SYD" or region == "syd" or region == "4":
         flvs_syd = cs_syd.list_flavors()
         for flv in flvs_syd:
             print "ID:", flv.id, flv.name
-    elif region == "HKG":
+    elif region == "HKG" or region == "hkg" or region == "5":
         flvs_hkg = cs_hkg.list_flavors()
         for flv in flvs_hkg:
             print "ID:", flv.id, flv.name
@@ -75,23 +75,23 @@ flavor = raw_input("Please select the flavor ID above you want to use: ")
 
 def list_images():
     print "Here is a list of images."
-    if region == "DFW":
+    if region == "DFW" or region == "dfw" or region == "1":
         imgs_dfw = cs_dfw.images.list()
         for img in imgs_dfw:
             print "Name: %s\n  ID: %s" % (img.name, img.id)
-    elif region == "ORD":
+    elif region == "ORD" or region == "ord" or region == "2":
         imgs_ord = cs_ord.images.list()
         for img in imgs_ord:
             print "Name: %s\n ID: %s" % (img.name, img.id)
-    elif region == "IAD":
+    elif region == "IAD" or region == "iad" or region == "3":
         imgs_iad = cs_iad.images.list()
         for img in imgs_iad:
             print "Name: %s\n ID: %s" % (img.name, img.id)
-    elif region == "SYD":
+    elif region == "SYD" or region == "syd" or region == "4":
         imgs_syd = cs_syd.images.list()
         for img in imgs_syd:
             print "Name: %s\n ID: %s" % (img.name, img,id)
-    elif region == "HKG":
+    elif region == "HKG" or region == "hkg" or region == "5":
         imgs_hkg = cs_hkg.images.list()
         for img in imgs_hkg:
             print "Name: %s\n ID: %s" % (img.name, img,id)
@@ -106,7 +106,7 @@ print "Your Server(s) will now build.... \n"
 def server_build():
     for i in range(number_of_servers):
         server_name = pyrax.utils.random_ascii(8)
-        if region == "DFW":
+        if region == "DFW" or region == "dfw" or  region == "1":
             server_dfw = cs_dfw.servers.create(server_name, image, flavor)
             print "Name:", server_dfw.name
             print "ID:", server_dfw.id
@@ -114,37 +114,37 @@ def server_build():
             print "Admin Password:", server_dfw.adminPass
             print "Networks:", server_dfw.networks
             print "\n" 
-        elif region == "ORD":
+        elif region == "ORD" or region == "ord" or region == "2":
             server_ord = cs_ord.servers.create(server_name, image, flavor)
             print "Name:", server_ord.name
             print "ID:", server_ord.id
             print "Status:", server_ord.status
             print "Admin Password:", server_ord.adminPass
-            print "Networks:", server_ord.netowrks
+            print "Networks:", server_ord.networks
             print "\n"
-        elif region == "IAD":
+        elif region == "IAD" or region == "iad" or region == "3":
             server_iad = cs_iad.servers.create(server_name, image, flavor)
             print "Name:", server_iad.name
             print "ID:", server_iad.id
             print "Status:", server_iad.status
             print "Admin Password:", server_iad.adminPass
-            print "Networks:", server_iad.netowrks
+            print "Networks:", server_iad.networks
             print "\n"
-        elif region == "SYD":
+        elif region == "SYD" or region == "syd" or region == "4":
             server_syd = cs_syd.servers.create(server_name, image, flavor)
             print "Name:", server_syd.name
             print "ID:", server_syd.id
             print "Status:", server_syd.status
             print "Admin Password:", server_syd.adminPass
-            print "Networks:", server_syd.netowrks
+            print "Networks:", server_syd.networks
             print "\n"
-        elif region == "HKG":
+        elif region == "HKG" or region == "hkg" or region == "5":
             server_hkg = cs_hkg.servers.create(server_name, image, flavor)
             print "Name:", server_hkg.name
             print "ID:", server_hkg.id
             print "Status:", server_hkg.status
             print "Admin Password:", server_hkg.adminPass
-            print "Networks:", server_hkg.netowrks
+            print "Networks:", server_hkg.networks
             print "\n"
         else:
             return
